@@ -1,14 +1,15 @@
 <template>
-  <div class="content col-md-12">
-    <div class="content__subtitle col-md-12">
+  <v-card flat class="card" :style="cssVars">
+    <v-card-text class="card__header">
       <v-icon>mdi-arrow-left</v-icon>
-      <span>Back to bedroom</span>
-    </div>
-    <div class="content__title">
-      <div class="content__title-subheader">BEDROOM</div>
-      <div class="content__title-header">College Essentials</div>
-    </div>
-    <div class="content__stars">
+      <span>Back to Bedroom</span>
+    </v-card-text>
+    <v-card-subtitle class="card__subtitle px-4">{{
+      getData.subtitle
+    }}</v-card-subtitle>
+    <v-card-title class="card__title px-4">{{ getData.title }}</v-card-title>
+
+    <v-card-text class="card__stars">
       <v-rating
         full-icon="$mdiStar"
         half-icon="$mdiStarHalfFull"
@@ -18,172 +19,302 @@
         value="3"
       ></v-rating>
       <span>4.4 328 (reviews)</span>
-    </div>
-    <div class="content__body">
-      <div class="content__body-quality">
-        <v-card flat class="py-12">
-          <v-card-text>
-            <v-row align="center" justify="left">
-              <v-col cols="12">
-                <p class="text-left">Select Quality</p>
-              </v-col>
-              <v-btn-toggle v-model="toggle_exclusive_quality" mandatory>
-                <v-btn width="200"> Basic </v-btn>
-                <v-btn width="200"> Premium </v-btn>
-              </v-btn-toggle>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
+    </v-card-text>
+    <!-- quality -->
+    <v-card-text class="card__quality">
+      <v-row>
+        <v-col cols="12" sm="12">
+          <p>{{ getData.quality.title }}</p>
 
-      <div class="content__body-style">
-        <v-card flat class="py-12">
-          <v-card-text>
-            <v-row align="left" justify="left">
-              <v-col cols="12">
-                <p class="text-left">Style</p>
-              </v-col>
-              <v-btn-toggle
-                v-model="toggle_exclusive_style"
-                mandatory
-                class="group-style"
-              >
-                <v-btn> Minimal </v-btn>
-                <v-btn> Bohemian </v-btn>
-                <v-btn> Floral </v-btn>
-                <v-btn> Other </v-btn>
-              </v-btn-toggle>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
+          <v-btn-toggle v-model="toggle_quality">
+            <v-btn
+              v-for="item in getData.quality.arr"
+              :key="item"
+              @click="getQualityThing"
+              >{{ item }}
+            </v-btn>
+          </v-btn-toggle>
+        </v-col>
+      </v-row>
+    </v-card-text>
+    <!-- style -->
+    <v-card-text class="card__style">
+      <v-row>
+        <v-col cols="12" sm="12">
+          <p>{{ getData.style.title }}</p>
+          <v-btn-toggle v-model="toggle_style">
+            <v-btn
+              v-for="item in getData.style.arr"
+              :key="item"
+              @click="getStyleThing"
+              >{{ item }}
+            </v-btn>
+          </v-btn-toggle>
+        </v-col>
+      </v-row>
+    </v-card-text>
+    <!-- /* color */ -->
 
-      <div class="content__body-color">
-        <v-card flat class="py-12">
-          <v-card-text>
-            <v-row align="left" justify="left">
-              <v-col cols="12">
-                <p class="text-left">Color</p>
-              </v-col>
-              <div model="toggle_exclusive_color" mandatory class="group-color">
-                <div class="color"></div>
-                <div class="color"></div>
-                <div class="color"></div>
-                <div class="color"></div>
-              </div>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
-      <div class="content__body-size">
-        <v-card flat class="py-12">
-          <v-card-text>
-            <v-row align="left" justify="left">
-              <v-col cols="12">
-                <p class="left">Size</p>
-              </v-col>
-              <v-btn-toggle v-model="toggle_exclusive_size">
-                <v-btn> Twin XL </v-btn>
-                <v-btn> Full </v-btn>
-              </v-btn-toggle>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
-    </div>
-  </div>
+    <v-card-text>
+      <v-row>
+        <v-col cols="12" sm="12">
+          <p>{{ getData.color.title }}</p>
+        </v-col>
+        <!-- <div v-for="(item,index) in getData.color.arr" :key="index" class="btn-toggle">
+          <button @click="getColorThing" :class='"btn-"+index'></button>
+        </div> -->
+        <v-btn-toggle v-model="toggle_color" class="btn-toggle">
+          <v-btn
+            v-for="(item, i) in getData.color.arr"
+            :key="i"
+            @click="getColorThing"
+            :class="'btn' + i"
+          ></v-btn>
+        </v-btn-toggle>
+      </v-row>
+    </v-card-text>
+
+    <!-- /* size */ -->
+    <v-card-text class="card__size">
+      <v-row>
+        <v-col cols="12" sm="12">
+          <p>{{ getData.size.title }}</p>
+          <v-btn-toggle v-model="toggle_size">
+            <v-btn
+              rounded
+              v-for="item in getData.size.arr"
+              :key="item"
+              @click="getSizeThing"
+              >{{ item }}
+            </v-btn>
+          </v-btn-toggle>
+        </v-col>
+      </v-row>
+    </v-card-text>
+
+    <!-- /* comments */ -->
+    <v-card-text>
+      <tab-component></tab-component>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
+import TabComponent from "./TabComponent.vue";
 export default {
+  name: "RightBlock",
+  components: {
+    TabComponent,
+  },
+  created() {
+    this.colors = this.getData.color.arr.map((i) => i.color);
+    console.log(this.colors[0]);
+  },
   data() {
     return {
-      toggle_exclusive_quality: 0,
-      toggle_exclusive_style: 0,
-      toggle_exclusive_size: 0,
-      toggle_exclusive_color: undefined,
-      tab: null,
-        items: [
-          { tab: 'One', content: 'Tab 1 Content' },
-          { tab: 'Two', content: 'Tab 2 Content' },
-          { tab: 'Three', content: 'Tab 3 Content' },
-          { tab: 'Four', content: 'Tab 4 Content' },
-          { tab: 'Five', content: 'Tab 5 Content' },
-          { tab: 'Six', content: 'Tab 6 Content' },
-          { tab: 'Seven', content: 'Tab 7 Content' },
-          { tab: 'Eight', content: 'Tab 8 Content' },
-          { tab: 'Nine', content: 'Tab 9 Content' },
-          { tab: 'Ten', content: 'Tab 10 Content' },
-        ],
+      colors: [],
+      toggle_quality: undefined,
+      toggle_size: undefined,
+      toggle_style: undefined,
+      toggle_color: 0,
     };
+  },
+
+  computed: {
+    ...mapGetters(["getData", "getSendData"]),
+    getColorThing() {
+      this.changeImg(this.getData.color.arr[this.toggle_color].img),
+        this.changeColor(this.getData.color.arr[this.toggle_color].color);
+    },
+    getQualityThing() {
+      this.changeQuality(this.getData.quality.arr[this.toggle_quality]);
+    },
+    getSizeThing() {
+      this.changeStyle(this.getData.size.arr[this.toggle_size]);
+    },
+    getStyleThing() {
+      this.changeSize(this.getData.style.arr[this.toggle_style]);
+    },
+    cssVars() {
+      return {
+        "--bg-color-0": this.colors[0],
+        "--bg-color-1": this.colors[1],
+        "--bg-color-2": this.colors[2],
+        "--bg-color-3": this.colors[3],
+      };
+    },
+  },
+  methods: {
+    ...mapActions([
+      "changeQuality",
+      "changeSize",
+      "changeStyle",
+      "changeImg",
+      "changeColor",
+    ]),
+    cssVars() {
+      return {};
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.content {
+$btn-color0: var(--bg-color-0);
+$btn-color1: var(--bg-color-1);
+$btn-color2: var(--bg-color-2);
+$btn-color3: var(--bg-color-3);
+
+.card {
   margin-left: 35px;
-  border: 2px solid red;
-  &__subtitle {
-    padding: 30px;
-    color: #2020a4;
-    font-size: 19px;
+  p {
     font-weight: 600;
-    span {
-      margin-left: 15px;
-    }
+    margin-bottom: 10px;
+  }
+  &__header {
+    font-size: 19px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    font-weight: 600;
+    color: #3138b1;
+    margin-bottom: 20px;
   }
   &__title {
-    padding: 30px;
-    .content__title-subheader {
-      color: #ccc;
-      font-size: 21px;
-      letter-spacing: 3px;
-    }
-    .content__title-header {
-      font-size: 36px;
-      font-weight: 800;
-    }
+    padding: 8px 0 30px 0;
+    font-size: 36px;
+    font-weight: 800;
+    text-transform: initial !important;
   }
+  &__subtitle {
+    padding: 30px 0 0 0;
+    letter-spacing: 3px;
+    font-size: 21px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+
   &__stars {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 15px;
-    padding: 0 30px;
   }
-  &__body {
-    &-quality,
-    &-size,
-    &-style {
-      padding: 30px;
-      .text-left {
-        text-align: left !important;
-        font-size: 20px;
-        font-weight: 500;
-      }
+  &__quality {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 15px;
+    .v-btn-group.v-theme--light.v-btn-group--density-default.v-btn-toggle {
+      height: 50px !important;
     }
-    &-style {
-      .group-style {
-        .v-btn {
-          border-radius: 25px;
-        }
-      }
+    .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
+      border: 1px solid #ccc;
+      padding: 0 60px;
+      letter-spacing: 0;
+      text-transform: initial !important;
     }
-    &-color {
-      .color {
-        width: 75px;
-        height: 75px;
-        border-radius: 50%;
-        background: #2020a4;
+  }
 
-      }
-      .group-color {
-        padding: 30px;
-        display: flex;
-        gap: 5px;
-      }
+  &__size,
+  &__style {
+    font-size: 20px;
+    font-weight: 500;
+    .v-btn-group.v-theme--light.v-btn-group--density-default.v-btn-toggle {
+      height: 45px !important;
     }
+
+    .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      margin-right: 8px;
+      letter-spacing: 0;
+      text-transform: initial !important;
+      padding: 0 40px;
+    }
+  }
+}
+
+.btn-toggle {
+  display: flex;
+  gap: 15px;
+  background: #F6F6FA !important;
+  button {
+    border-radius: 45px !important;
+    opacity: 1 !important;
+    border: 1px solid inherit !important;
+
+    &:after {
+      border-radius: 45px !important;
+      border: 1px solid inherit !important;
+      opacity: 0;
+    }
+  }
+  /*btn-0*/
+  .btn0 {
+    color: $btn-color0;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn0 {
+    background: $btn-color0 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn0::after {
+    background: $btn-color0 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn0 {
+    background: $btn-color0 !important;
+    opacity: 0.65 !important;
+  }
+  /*btn-1*/
+  .btn1 {
+    color: $btn-color1;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn1 {
+    background: $btn-color1 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn1::after {
+    background: $btn-color1 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn1 {
+    background: $btn-color1 !important;
+    opacity: 0.65 !important;
+  }
+  /*btn-2*/
+  .btn2 {
+    color: $btn-color2;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn2 {
+    background: $btn-color2 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn2::after {
+    background: $btn-color2 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn2 {
+    background: $btn-color2 !important;
+    opacity: 0.65 !important;
+  }
+  /*btn-3*/
+  .btn3 {
+    color: $btn-color3;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn3 {
+    background: $btn-color3 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn3::after {
+    background: $btn-color3 !important;
+    opacity: 1 !important;
+  }
+  button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn3 {
+    background: $btn-color3 !important;
+    opacity: 0.65 !important;
   }
 }
 </style>

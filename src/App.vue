@@ -1,44 +1,96 @@
 <template>
   <v-app>
     <v-main>
-       <v-container-fluid class="grey lighten-5">
-        <v-row no-gutters cols=12>
-          <v-col
-            cols="6"
-          >
-            <image-component class="leftBlock col-12"></image-component>
-          </v-col>
-           <v-col
-            cols="6"
-          >
-            <right-block class="rightBlock col-12"></right-block>
-          </v-col>
-        </v-row>
-      </v-container-fluid>
-      <!-- <left-nav-bar></left-nav-bar> -->
+      <v-row cols="12" class="container">
+        <v-card class="leftBar">
+          <v-card-text class="leftBar__top"> <v-icon>mdi-currency-eth</v-icon><v-icon>mdi-magnify</v-icon></v-card-text>
+          <v-card-text class="leftBar__bottom"><v-icon>mdi-account-outline</v-icon><v-icon>mdi-basket-outline</v-icon></v-card-text>
+        </v-card>
+        <v-col cols="6" class="leftBlock">
+          <left-block></left-block>
+        </v-col>
+        <v-col cols="5">
+          <right-block></right-block>
+        </v-col>
+        <fixed-component class ="fixed"></fixed-component>
+      </v-row>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import LeftNavBar from "./components/LeftNavBar.vue";
-import RightBlock from "./components/RightBlock.vue";
-import ImageComponent from "./components/ImageComponent";
-
+import RightBlock from './components/RightBlock.vue'
+import LeftBlock from './components/LeftBlock.vue'
+import FixedComponent from './components/FixedComponent.vue'
 export default {
-  name: "App",
-  
-  components: {
-    LeftNavBar,
-    RightBlock,
-    ImageComponent,
+  components: { RightBlock, LeftBlock, FixedComponent},
+  name: 'App',
+  data(){
+    return{
+      propsData: {
+        title: "College Essentials",
+        subtitle: "BEDROOM",
+        quality:{
+          title:"Select quality",
+          arr:["Basic", "Premium"],
+        } ,
+        size:{
+          title:"Size",
+          arr: ["Twin XL", "Full"],
+          },
+        style:{
+          title:"Style",
+          arr: ["Minimal", "Bohemian", "Floral", "Other"],
+        },
+        color:{
+          title:"color",
+          arr:[{ color: "aqua", img: "" },{ color: "black", img: "" },{ color: "ccc", img: "" },{ color: "white", img: "" }],
+        }, 
+      },
+    }
   },
-};
+}
 </script>
-<style lang="scss">
-   .content{
-    display: block;
+<style lang="scss" scoped>
+.container{
+  position:relative;
+  .leftBlock{
+    margin-left:50px;
+  }
+  .leftBar{
+    position: fixed;
+    display:flex;
+    flex-direction:column;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    justify-content:space-between;
+    &__top,&__bottom{
+    font-size:1.1rem !important;
+    }
+    &__bottom{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 15px;
+    }
+  }
+}
+
+.v-card--variant-elevated{
+  box-shadow:none !important;
+}
+
+.fixed{
+    position: fixed;
+    bottom: 55px;
+    left: 70px;
+    display: flex;
     flex-direction: row;
-   }
-   
+    align-items: center;
+    justify-content: center;
+    box-shadow: -1px -3px 9px #ccc !important
+}
 </style>
