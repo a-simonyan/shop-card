@@ -2,10 +2,8 @@
   <v-app>
     <v-main>
       <v-row cols="12" class="container">
-        <v-card class="leftBar">
-          <v-card-text class="leftBar__top"> <v-icon>mdi-currency-eth</v-icon><v-icon>mdi-magnify</v-icon></v-card-text>
-          <v-card-text class="leftBar__bottom"><v-icon>mdi-account-outline</v-icon><v-icon>mdi-basket-outline</v-icon></v-card-text>
-        </v-card>
+        <!-- LEftNavbar -->
+        <left-nav-bar></left-nav-bar>
         <v-col cols="6" class="leftBlock">
           <left-block></left-block>
         </v-col>
@@ -21,9 +19,11 @@
 <script>
 import RightBlock from './components/RightBlock.vue'
 import LeftBlock from './components/LeftBlock.vue'
+import LeftNavBar from './components/LeftNavBar.vue'
+
 import FixedComponent from './components/FixedComponent.vue'
 export default {
-  components: { RightBlock, LeftBlock, FixedComponent},
+  components: { RightBlock, LeftBlock, FixedComponent,LeftNavBar},
   name: 'App',
   data(){
     return{
@@ -57,26 +57,7 @@ export default {
   .leftBlock{
     margin-left:50px;
   }
-  .leftBar{
-    position: fixed;
-    display:flex;
-    flex-direction:column;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    justify-content:space-between;
-    &__top,&__bottom{
-    font-size:1.1rem !important;
-    }
-    &__bottom{
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 15px;
-    }
-  }
+  
 }
 
 .v-card--variant-elevated{
