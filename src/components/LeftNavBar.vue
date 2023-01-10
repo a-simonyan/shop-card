@@ -31,6 +31,11 @@ export default {
   &__bottom {
     font-size: 1.1rem !important;
   }
+  &__top{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+  }
   &__bottom {
     display: flex;
     flex-direction: column;

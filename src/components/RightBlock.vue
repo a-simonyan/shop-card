@@ -11,8 +11,10 @@
 
     <v-card-text class="card__stars">
       <v-rating
-        full-icon="$mdiStar"
-        half-icon="$mdiStarHalfFull"
+        v-model="rating"
+        background-color="yellow lighten-3"
+        color="yellow"
+        large
         hover
         length="5"
         size="26"
@@ -108,12 +110,13 @@ export default {
   },
   created() {
     this.changeImg(this.getData.color.arr[0].img);
-    this.changeTitle(this.getData.title)
+    this.changeTitle(this.getData.title);
     this.colors = this.getData.color.arr.map((i) => i.color);
   },
   data() {
     return {
       colors: [],
+      rating: 0,
       toggle_quality: undefined,
       toggle_size: undefined,
       toggle_style: undefined,
@@ -123,7 +126,7 @@ export default {
   computed: {
     ...mapGetters(["getData", "getSendData"]),
     getColorThing() {
-      if(this.toggle_color !== undefined){
+      if (this.toggle_color !== undefined) {
         this.changeImg(this.getData.color.arr[this.toggle_color].img);
       }
     },
@@ -240,7 +243,7 @@ $btn-color3: var(--bg-color-3);
   button {
     border-radius: 45px !important;
     opacity: 1 !important;
-    border: 1px solid inherit !important;
+    border: 1px solid black !important;
 
     &:after {
       border-radius: 45px !important;
@@ -248,6 +251,10 @@ $btn-color3: var(--bg-color-3);
       opacity: 0;
     }
   }
+    button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
+          border: 2px solid black !important;
+    }
+
   /*btn-0*/
   .btn0 {
     color: $btn-color0;
