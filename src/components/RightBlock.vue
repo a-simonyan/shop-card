@@ -2,7 +2,7 @@
   <v-card flat class="card" :style="cssVars">
     <v-card-text class="card__header">
       <v-icon>mdi-arrow-left</v-icon>
-      <span>Back to Bedroom</span>
+      <span>Back to bedroom</span>
     </v-card-text>
     <v-card-subtitle class="card__subtitle px-4">{{
       getData.subtitle
@@ -57,9 +57,9 @@
     </v-card-text>
     <!-- /* color */ -->
 
-    <v-card-text>
+    <v-card-text class="card__color">
       <v-row>
-        <v-col cols="12" sm="12">
+        <v-col cols="12" sm="12" class="card__color-title">
           <p>{{ getData.color.title }}</p>
         </v-col>
 
@@ -191,7 +191,7 @@ $btn-color3: var(--bg-color-3);
   &__subtitle {
     padding: 30px 0 0 0;
     letter-spacing: 3px;
-    font-size: 21px;
+    font-size: 17px;
     margin-bottom: 0;
     text-transform: uppercase;
   }
@@ -207,7 +207,7 @@ $btn-color3: var(--bg-color-3);
     font-weight: 500;
     margin-top: 15px;
     .v-btn-group.v-theme--light.v-btn-group--density-default.v-btn-toggle {
-      height: 50px !important;
+      height: 40px !important;
     }
     .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
       border: 1px solid #ccc;
@@ -222,7 +222,7 @@ $btn-color3: var(--bg-color-3);
     font-size: 20px;
     font-weight: 500;
     .v-btn-group.v-theme--light.v-btn-group--density-default.v-btn-toggle {
-      height: 45px !important;
+      height: 40px !important;
     }
 
     .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
@@ -234,26 +234,46 @@ $btn-color3: var(--bg-color-3);
       padding: 0 40px;
     }
   }
+  &__color {
+    &-title {
+      padding-bottom: 0 !important;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .v-btn--size-default {
+      min-width: 48px !important;
+    }
+  }
 }
 
 .btn-toggle {
   display: flex;
   gap: 15px;
   background: #f6f6fa !important;
+  padding-left: 12px;
+  p {
+    padding-bottom: 0px;
+  }
   button {
     border-radius: 45px !important;
     opacity: 1 !important;
-    border: 1px solid black !important;
+    // border: 1px solid black !important;
 
     &:after {
       border-radius: 45px !important;
       border: 1px solid inherit !important;
       opacity: 0;
     }
-  }
-    button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
-          border: 2px solid black !important;
+    :hover {
+      border: 1px solid #ccc !important;
     }
+  }
+
+  button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
+    border: 2px solid black;
+  }
 
   /*btn-0*/
   .btn0 {
@@ -269,7 +289,7 @@ $btn-color3: var(--bg-color-3);
   }
   button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn0 {
     background: $btn-color0 !important;
-    opacity: 0.65 !important;
+    opacity: 1 !important;
   }
   /*btn-1*/
   .btn1 {
@@ -285,7 +305,7 @@ $btn-color3: var(--bg-color-3);
   }
   button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn1 {
     background: $btn-color1 !important;
-    opacity: 0.65 !important;
+    opacity: 1 !important;
   }
   /*btn-2*/
   .btn2 {
@@ -301,7 +321,7 @@ $btn-color3: var(--bg-color-3);
   }
   button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn2 {
     background: $btn-color2 !important;
-    opacity: 0.65 !important;
+    opacity: 1 !important;
   }
   /*btn-3*/
   .btn3 {
@@ -317,7 +337,7 @@ $btn-color3: var(--bg-color-3);
   }
   button.v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.btn3 {
     background: $btn-color3 !important;
-    opacity: 0.65 !important;
+    opacity: 1 !important;
   }
 }
 </style>

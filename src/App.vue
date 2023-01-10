@@ -55,7 +55,7 @@ export default {
 .container{
   position:relative;
   .leftBlock{
-    margin-left:50px;
+    margin-left:100px;
   }
   
 }
@@ -67,11 +67,13 @@ export default {
 .fixed{
     position: fixed;
     bottom: 55px;
-    left: 70px;
+    left: 140px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+// box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     box-shadow: -1px -3px 9px #ccc !important
 }
 </style>

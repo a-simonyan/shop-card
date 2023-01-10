@@ -25,4 +25,7 @@ export default {
   width: 100%;
   height: 750px;
 }
+.v-card.v-theme--light.v-card--density-default.v-card--variant-elevated{
+  border-radius:0px !important ;
+}
 </style>
