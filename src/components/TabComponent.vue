@@ -10,7 +10,6 @@
           dark
           icons-and-text
         >
-          <v-tabs-slider ></v-tabs-slider>
 
           <v-tab cols=4 key="0"> What's inside </v-tab>
 

@@ -60,9 +60,7 @@
         <v-col cols="12" sm="12">
           <p>{{ getData.color.title }}</p>
         </v-col>
-        <!-- <div v-for="(item,index) in getData.color.arr" :key="index" class="btn-toggle">
-          <button @click="getColorThing" :class='"btn-"+index'></button>
-        </div> -->
+
         <v-btn-toggle v-model="toggle_color" class="btn-toggle">
           <v-btn
             v-for="(item, i) in getData.color.arr"
@@ -92,7 +90,7 @@
       </v-row>
     </v-card-text>
 
-    <!-- /* comments */ -->
+    <!-- /* tabs */ -->
     <v-card-text>
       <tab-component></tab-component>
     </v-card-text>
@@ -109,8 +107,9 @@ export default {
     TabComponent,
   },
   created() {
+    this.changeImg(this.getData.color.arr[0].img);
+    this.changeTitle(this.getData.title)
     this.colors = this.getData.color.arr.map((i) => i.color);
-    console.log(this.colors[0]);
   },
   data() {
     return {
@@ -121,20 +120,20 @@ export default {
       toggle_color: 0,
     };
   },
-
   computed: {
     ...mapGetters(["getData", "getSendData"]),
     getColorThing() {
-      this.changeImg(this.getData.color.arr[this.toggle_color].img),
-        this.changeColor(this.getData.color.arr[this.toggle_color].color);
+      if(this.toggle_color !== undefined){
+        this.changeImg(this.getData.color.arr[this.toggle_color].img);
+      }
     },
     getQualityThing() {
       this.changeQuality(this.getData.quality.arr[this.toggle_quality]);
     },
-    getSizeThing() {
+    getStyleThing() {
       this.changeStyle(this.getData.size.arr[this.toggle_size]);
     },
-    getStyleThing() {
+    getSizeThing() {
       this.changeSize(this.getData.style.arr[this.toggle_style]);
     },
     cssVars() {
@@ -152,11 +151,8 @@ export default {
       "changeSize",
       "changeStyle",
       "changeImg",
-      "changeColor",
+      "changeTitle",
     ]),
-    cssVars() {
-      return {};
-    },
   },
 };
 </script>
@@ -240,7 +236,7 @@ $btn-color3: var(--bg-color-3);
 .btn-toggle {
   display: flex;
   gap: 15px;
-  background: #F6F6FA !important;
+  background: #f6f6fa !important;
   button {
     border-radius: 45px !important;
     opacity: 1 !important;

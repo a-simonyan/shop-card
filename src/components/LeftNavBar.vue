@@ -1,7 +1,8 @@
 <template>
   <v-card class="leftBar">
     <v-card-text class="leftBar__top">
-      <v-icon>mdi-currency-eth</v-icon><v-icon>mdi-magnify</v-icon></v-card-text
+      <v-icon>mdi-currency-eth</v-icon>
+      <v-icon>mdi-magnify</v-icon></v-card-text
     >
     <v-card-text class="leftBar__bottom"
       ><v-icon>mdi-account-outline</v-icon
@@ -34,7 +35,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    gap: 15px;
+    gap: 30px;
+    margin-bottom: 55px;
   }
 }
 </style>

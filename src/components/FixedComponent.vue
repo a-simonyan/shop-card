@@ -6,7 +6,7 @@
           class="ml-10"
           max-height="100"
           max-width="100"
-          :src="getData.defaultImage"
+          :src="getSendData.image"
         ></v-img>
       </v-col>
       <v-col cols="4" class="card-fixed__title">
@@ -14,10 +14,10 @@
         <v-card-subtitle> Everything you need for freshman</v-card-subtitle>
       </v-col>
       <v-col cols="1" class="text-center">
-        <v-card-subtitle>Adds On</v-card-subtitle>
-        <v-text-subtitle>
+        <v-card-subtitle>Add Ons</v-card-subtitle>
+        <v-card-subtitle>
           <v-icon color="#ccc">mdi-plus</v-icon>
-        </v-text-subtitle>
+        </v-card-subtitle>
       </v-col>
       <v-col cols="3" offset="2" class="card-fixed__price flex">
         <span> $ {{ getData.price }}</span>
