@@ -1,7 +1,7 @@
 <template>
   <v-card flat class="card" :style="cssVars">
     <v-card-text class="card__header">
-      <v-icon>mdi-arrow-left</v-icon>
+      <v-icon size="16">mdi-arrow-left</v-icon>
       <span>Back to bedroom</span>
     </v-card-text>
     <v-card-subtitle class="card__subtitle px-4">{{
@@ -20,7 +20,7 @@
         size="26"
         value="3"
       ></v-rating>
-      <span>4.4 328 (reviews)</span>
+      <span>4.0 (328 reviews)</span>
     </v-card-text>
     <!-- quality -->
     <v-card-text class="card__quality">
@@ -116,7 +116,7 @@ export default {
   data() {
     return {
       colors: [],
-      rating: 0,
+      rating: 4,
       toggle_quality: undefined,
       toggle_size: undefined,
       toggle_style: undefined,
@@ -173,14 +173,15 @@ $btn-color3: var(--bg-color-3);
     margin-bottom: 10px;
   }
   &__header {
-    font-size: 19px;
+    font-size: 0.875rem;
     display: flex;
     flex-direction: row;
     gap: 5px;
     align-items: center;
     font-weight: 600;
     color: #3138b1;
-    margin-bottom: 20px;
+    margin-top: 18px;
+    padding-bottom:0 !important;
   }
   &__title {
     padding: 8px 0 30px 0;

@@ -31,7 +31,7 @@
                 </v-col>
                 <v-col cols="7" class="inside__item--text">
                   <div class="inside__item--text-titleBlock">
-                    <v-card-title>Decorative pillow</v-card-title>
+                    <v-card-title class="first">Decorative pillow</v-card-title>
                     <v-card-title class="second"
                       >See product details</v-card-title
                     >
@@ -50,7 +50,7 @@
                 </v-col>
                 <v-col cols="7" class="inside__item--text">
                   <div class="inside__item--text-titleBlock">
-                    <v-card-title>Throw KEISON </v-card-title>
+                    <v-card-title class="first">Throw KEISON </v-card-title>
                     <v-card-title class="second"
                       >See product details</v-card-title
                     >
@@ -108,11 +108,16 @@ button.v-btn.v-theme--light.v-btn--density-default.rounded-0.v-btn--size-default
   &__title {
     padding-left: 0 !important;
     margin: 25px 0 15px 0;
+    font-size: 0.875rem;
   }
   &__item {
     align-items: center;
     &--text {
+      .first {
+        font-size: 0.875rem !important;
+      }
       .second {
+        font-size: 0.875rem !important;
         font-weight: 400 !important;
         cursor: pointer;
       }

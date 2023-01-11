@@ -1,7 +1,7 @@
 <template>
   <v-card class="card-fixed flex">
     <v-row class="flex">
-      <v-col cols="4">
+      <v-col cols="5">
         <v-card-text class="card-fixed__left">
           <v-img
             class="ml-10"
@@ -15,7 +15,7 @@
           </v-card-text>
         </v-card-text>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="7">
         <v-card-text class="card-fixed__right">
           <v-card-text class="card-fixed__right--addOns">
             <span class="card-fixed__right--addOns-text">Add Ons</span>
@@ -68,25 +68,7 @@ export default {
       font-size: 22px;
     }
   }
-  // &__addOns {
-  //   &-text {
-  //     font-size: 15px !important;
-  //     color: rgba(0, 0, 0, 0.87);
-  //     font-weight: 700;
-  //     margin-left: 1px;
-  //   }
-  //   &-icon {
-  //     .plus_icon {
-  //       font-size: 22px;
-  //       margin-left: 1px;
-  //       margin-top: 6px;
-  //       color: #ccc;
-  //       border: 1px solid #ccc;
-  //       padding: 20px;
-  //       border-radius: 3px;
-  //     }
-  //   }
-  // }
+
   &__left {
     display: flex;
     flex-direction: row;

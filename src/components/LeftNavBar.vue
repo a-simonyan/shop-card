@@ -1,7 +1,7 @@
 <template>
   <v-card class="leftBar">
     <v-card-text class="leftBar__top">
-      <v-icon>mdi-menu</v-icon>
+      <v-icon class="leftBar__top-menuIcon">mdi-menu</v-icon>
       <v-icon>mdi-magnify</v-icon></v-card-text
     >
     <v-card-text class="leftBar__bottom"
@@ -37,6 +37,11 @@ export default {
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    &-menuIcon{
+      margin-top:15px;
+
+    }
+
   }
   &__bottom {
     display: flex;
