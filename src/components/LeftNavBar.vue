@@ -5,9 +5,8 @@
       <v-icon>mdi-magnify</v-icon></v-card-text
     >
     <v-card-text class="leftBar__bottom"
-      ><v-icon>mdi-account-outline</v-icon
-      ><v-icon>mdi-basket-outline</v-icon></v-card-text
-    >
+      ><v-icon>mdi-account-outline</v-icon><v-icon>mdi-basket-outline</v-icon>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -18,18 +17,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .leftBar {
   position: fixed;
   display: flex;
   flex-direction: column;
-  top: 0;
-  left: 0;
+  top: 75px;
+  left: 91px;
   width: 140px;
-  height: 100%;
-  justify-content: space-between;
-  &__top,
-  &__bottom {
+  height: calc(100% - 150px);
+  justify-content: &__top, &__bottom {
     font-size: 1.1rem !important;
   }
   &__top {
@@ -37,11 +33,9 @@ export default {
     flex-direction: column;
     gap: 30px;
     align-items: center;
-    &-menuIcon{
-      margin-top:15px;
-
+    &-menuIcon {
+      margin-top: 15px;
     }
-
   }
   &__bottom {
     display: flex;
@@ -50,6 +44,23 @@ export default {
     gap: 30px;
     margin-bottom: 55px;
     align-items: center;
+  }
+}
+
+@media(max-width:"1640px"){
+  .leftBar{
+    width:100px;
+// left:75px;
+  }
+}
+@media(max-width:"1368px"){
+  .leftBar{
+    width:70px;
+  }
+}
+  @media(max-width:"1063px"){
+  .leftBar{
+    width:40px;
   }
 }
 </style>

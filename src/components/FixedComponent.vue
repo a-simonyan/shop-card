@@ -10,7 +10,7 @@
             :src="getSendData.image"
           ></v-img>
           <v-card-text class="card-fixed__title">
-            <v-card-title>{{ getData.title }}</v-card-title>
+            <v-card-title>{{ getData?.title }}</v-card-title>
             <v-card-subtitle> Everything you need for freshman</v-card-subtitle>
           </v-card-text>
         </v-card-text>
@@ -24,7 +24,7 @@
             </div>
           </v-card-text>
           <v-card-text class="card-fixed__right--price">
-            <span> ${{ getData.price }}</span>
+            <span> ${{ getData?.price }}</span>
             <v-btn
               @click="sendCardData"
               class="card-fixed__price-add depressed"
@@ -37,18 +37,21 @@
       </v-col>
     </v-row>
   </v-card>
+
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters,mapActions } from "vuex";
 export default {
   name: "FixedComponent",
   computed: {
-    ...mapGetters(["getData", "getSendData"]),
+    ...mapGetters(["getData", "getSendData","getSuccessRequest"]),
   },
   methods: {
+    ...mapActions(['addCardPrice','postRequestData']),
     sendCardData() {
-      console.log(this.getSendData);
+      this.addCardPrice({id: this.getData.id, price: this.getData.price })
+     this.postRequestData(this.getSendData)
     },
   },
 };
@@ -104,7 +107,7 @@ export default {
         }
       }
     }
-
+   
     &-add {
       text-transform: initial !important;
     }
@@ -122,4 +125,5 @@ export default {
     }
   }
 }
+
 </style>

@@ -1,69 +1,64 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    data: {
-      title: "College Essentials",
-      subtitle: "BEDROOM",
-      price: 195,
-      quality: {
-        title: "Select quality",
-        arr: ["Basic", "Premium"],
-      },
-      size: {
-        title: "Size",
-        arr: ["Twin XL", "Full"],
-      },
-      style: {
-        title: "Style",
-        arr: ["Minimal", "Bohemian", "Floral", "Other"],
-      },
-      color: {
-        title: "Color",
-        arr: [
-          {
-            color: "#c2b3af",
-            // img: "https://www.armani.com/variants/images/17411127375785016/F/w350.jpg",
-            img: "https://www.togas.com/media/catalog/product/cache/1512aade760a85cd99082ae563244eb8/N/O/NOES_BL_VRTCL_A_3b5e.jpg",
-          },
-          {
-            color: "#ebebeb",
-            // img: "https://www.armani.com/variants/images/17411127375785024/D/w400.jpg",
-            img: "https://www.togas.com/media/catalog/product/cache/1512aade760a85cd99082ae563244eb8/_/1/_1__4_9_4c93.jpg",
-          },
-          {
-            color: "#957c6d",
-            // img: "https://www.armani.com/variants/images/17411127375785025/F/w400.jpg",
-            img: "https://www.togas.com/media/catalog/product/cache/1512aade760a85cd99082ae563244eb8/S/H/SHALTON_BL_VRTCL_63a1.jpg",
-          },
-          {
-            color: "#6c1627",
-            // img: "https://www.armani.com/variants/images/17411127375893613/D/w350.jpg",
-            img: "https://www.togas.com/media/catalog/product/cache/1512aade760a85cd99082ae563244eb8/M/I/MIDARIA_AD_01_1920x1080_3198.jpg",
-          },
-        ],
-      },
-    },
+    data: null,
+    loading: false,
     sendData: {
-      image: undefined,
+      id: undefined,
+      price: undefined,
       quality: undefined,
       style: undefined,
       title: undefined,
       size: undefined,
     },
+    success_request:false
   },
   getters: {
     getData: (state) => state.data,
     getSendData: (state) => state.sendData,
+    getDataLoading: (state) => state.loading,
+    getSuccessRequest: state => state.getSuccessRequest,
   },
   mutations: {
     SET_CHANGE_QUALITY: (state, payload) => (state.sendData.quality = payload),
     SET_CHANGE_STYLE: (state, payload) => (state.sendData.style = payload),
     SET_CHANGE_SIZE: (state, payload) => (state.sendData.size = payload),
-    SET_CHANGE_TITLE: (state, payload) => (state.sendData.title = payload),
+    SET_CARD_PRICE: (state, { id, price }) => {
+      (state.sendData.id = id), (state.sendData.price = price);
+    },
     SET_CHANGE_IMG: (state, payload) => (state.sendData.image = payload),
+    GET_ASYNC_DATA: (state, payload) => (state.data = payload),
+    GET_DATA_LOADING: (state, status) => (state.loading = status),
+    SET_SUCCESS_REQUEST: (state) => (state.success_request = true),
+    SET_FAILURE_REQUEST: (state) => (state.success_request = false),
   },
   actions: {
+    getFetchRequestData: ({ commit }) => {
+      commit("GET_DATA_LOADING", true);
+      fetch("http://127.0.0.1:8000/api/products")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data[0], "Actions");
+          commit("GET_ASYNC_DATA", data[0]);
+        })
+        .finally(() => {
+          commit("GET_DATA_LOADING", false);
+        });
+    },
+    postRequestData: ({ commit }, data) => {
+      const r = fetch("http://127.0.0.1:8000/api/orders", {
+        method: "POST",
+        body: data,
+      }).then((res) => {
+        res.status === 200
+          ? commit("SET_SUCCESS_REQUEST")
+          : commit("SET_FAILURE_REQUEST");
+      });
+      console.log(r);
+    },
     changeQuality: ({ commit }, payload) => {
       commit("SET_CHANGE_QUALITY", payload);
     },
@@ -73,8 +68,8 @@ export default createStore({
     changeSize: ({ commit }, payload) => {
       commit("SET_CHANGE_SIZE", payload);
     },
-    changeTitle: ({ commit }, payload) => {
-      commit("SET_CHANGE_TITLE", payload);
+    addCardPrice: ({ commit }, payload) => {
+      commit("SET_CARD_PRICE", payload);
     },
     changeImg: ({ commit }, payload) => {
       commit("SET_CHANGE_IMG", payload);

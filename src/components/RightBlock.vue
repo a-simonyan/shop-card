@@ -4,10 +4,10 @@
       <v-icon size="16">mdi-arrow-left</v-icon>
       <span>Back to bedroom</span>
     </v-card-text>
-    <v-card-subtitle class="card__subtitle px-4">{{
-      getData.subtitle
-    }}</v-card-subtitle>
-    <v-card-title class="card__title px-4">{{ getData.title }}</v-card-title>
+    <v-card-subtitle class="card__subtitle px-4">
+      {{ getData?.subtitle }}
+    </v-card-subtitle>
+    <v-card-title class="card__title px-4">{{ getData?.title }}</v-card-title>
 
     <v-card-text class="card__stars">
       <v-rating
@@ -22,15 +22,14 @@
       ></v-rating>
       <span>4.0 (328 reviews)</span>
     </v-card-text>
-    <!-- quality -->
     <v-card-text class="card__quality">
       <v-row>
         <v-col cols="12" sm="12">
-          <p>{{ getData.quality.title }}</p>
+          <p>{{ getData?.quality.title }}</p>
 
           <v-btn-toggle v-model="toggle_quality">
             <v-btn
-              v-for="item in getData.quality.arr"
+              v-for="item in getData?.quality.arr"
               :key="item"
               @click="getQualityThing"
               >{{ item }}
@@ -39,33 +38,30 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <!-- style -->
     <v-card-text class="card__style">
-      <v-row>
-        <v-col cols="12" sm="12">
-          <p>{{ getData.style.title }}</p>
-          <v-btn-toggle v-model="toggle_style">
-            <v-btn
-              v-for="item in getData.style.arr"
-              :key="item"
-              @click="getStyleThing"
-              >{{ item }}
-            </v-btn>
-          </v-btn-toggle>
-        </v-col>
-      </v-row>
+      <v-col cols="12" sm="12" class="card__color-title">
+        <p>{{ getData?.style.title }}</p>
+      </v-col>
+
+      <v-btn-toggle v-model="toggle_style" class="d-flex flex-wrap">
+        <v-btn
+          v-for="item in getData?.style.arr"
+          :key="item"
+          @click="getStyleThing"
+          >{{ item }}
+        </v-btn>
+      </v-btn-toggle>
     </v-card-text>
-    <!-- /* color */ -->
 
     <v-card-text class="card__color">
       <v-row>
         <v-col cols="12" sm="12" class="card__color-title">
-          <p>{{ getData.color.title }}</p>
+          <p>{{ getData?.color.title }}</p>
         </v-col>
 
         <v-btn-toggle v-model="toggle_color" class="btn-toggle">
           <v-btn
-            v-for="(item, i) in getData.color.arr"
+            v-for="(item, i) in getData?.color.arr"
             :key="i"
             @click="getColorThing"
             :class="'btn' + i"
@@ -74,15 +70,14 @@
       </v-row>
     </v-card-text>
 
-    <!-- /* size */ -->
     <v-card-text class="card__size">
       <v-row>
         <v-col cols="12" sm="12">
-          <p>{{ getData.size.title }}</p>
+          <p>{{ getData?.size.title }}</p>
           <v-btn-toggle v-model="toggle_size">
             <v-btn
               rounded
-              v-for="item in getData.size.arr"
+              v-for="item in getData?.size.arr"
               :key="item"
               @click="getSizeThing"
               >{{ item }}
@@ -92,7 +87,6 @@
       </v-row>
     </v-card-text>
 
-    <!-- /* tabs */ -->
     <v-card-text>
       <tab-component></tab-component>
     </v-card-text>
@@ -100,18 +94,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import TabComponent from "./TabComponent.vue";
 export default {
   name: "RightBlock",
   components: {
     TabComponent,
-  },
-  created() {
-    this.changeImg(this.getData.color.arr[0].img);
-    this.changeTitle(this.getData.title);
-    this.colors = this.getData.color.arr.map((i) => i.color);
   },
   data() {
     return {
@@ -124,7 +112,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getData", "getSendData"]),
+    ...mapGetters(["getData", "getDataLoading", "getSendData"]),
     getColorThing() {
       if (this.toggle_color !== undefined) {
         this.changeImg(this.getData.color.arr[this.toggle_color].img);
@@ -154,8 +142,15 @@ export default {
       "changeSize",
       "changeStyle",
       "changeImg",
-      "changeTitle",
     ]),
+  },
+  watch: {
+    getDataLoading(v) {
+      if (!v) {
+        this.changeImg(this.getData.color.arr[0].img);
+        this.colors = this.getData.color.arr.map((i) => i.color);
+      }
+    },
   },
 };
 </script>
@@ -181,7 +176,7 @@ $btn-color3: var(--bg-color-3);
     font-weight: 600;
     color: #3138b1;
     margin-top: 18px;
-    padding-bottom:0 !important;
+    padding-bottom: 0 !important;
   }
   &__title {
     padding: 8px 0 30px 0;
@@ -202,19 +197,19 @@ $btn-color3: var(--bg-color-3);
     flex-direction: row;
     align-items: center;
     gap: 15px;
+    flex-wrap: wrap;
   }
   &__quality {
     font-size: 20px;
     font-weight: 500;
     margin-top: 15px;
-    .v-btn-group.v-theme--light.v-btn-group--density-default.v-btn-toggle {
-      height: 40px !important;
-    }
+
     .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
       border: 1px solid #ccc;
       padding: 0 60px;
       letter-spacing: 0;
       text-transform: initial !important;
+      height: 48px !important;
     }
   }
 
@@ -222,17 +217,18 @@ $btn-color3: var(--bg-color-3);
   &__style {
     font-size: 20px;
     font-weight: 500;
-    .v-btn-group.v-theme--light.v-btn-group--density-default.v-btn-toggle {
-      height: 40px !important;
-    }
 
     .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
       border: 1px solid #ccc;
       border-radius: 30px;
-      margin-right: 8px;
       letter-spacing: 0;
       text-transform: initial !important;
       padding: 0 40px;
+      height: 40px !important;
+    }
+    .v-btn-toggle {
+      flex-wrap: wrap;
+      gap: 15px;
     }
   }
   &__color {
@@ -245,6 +241,7 @@ $btn-color3: var(--bg-color-3);
     }
     .v-btn--size-default {
       min-width: 48px !important;
+      min-height: 48px !important;
     }
   }
 }
@@ -252,6 +249,7 @@ $btn-color3: var(--bg-color-3);
 .btn-toggle {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
   background: #f6f6fa !important;
   padding-left: 12px;
   p {
@@ -260,7 +258,6 @@ $btn-color3: var(--bg-color-3);
   button {
     border-radius: 45px !important;
     opacity: 1 !important;
-    // border: 1px solid black !important;
 
     &:after {
       border-radius: 45px !important;
@@ -273,7 +270,7 @@ $btn-color3: var(--bg-color-3);
   }
 
   button.v-btn.v-btn--active.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
-    border: 2px solid black;
+    border: 2px solid #ccc;
   }
 
   /*btn-0*/
@@ -340,5 +337,8 @@ $btn-color3: var(--bg-color-3);
     background: $btn-color3 !important;
     opacity: 1 !important;
   }
+}
+
+@media (max-width: "1137px") {
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
-  <v-card>
+  <v-card class="card">
     <img :src="getSendData.image" alt="#" class="img" />
+    <!-- <v-img :src="getSendData.image" width="100%" heigh="620"></v-img> -->
   </v-card>
 </template>
 
@@ -13,19 +14,25 @@ export default {
       defaultImage: undefined,
     };
   },
-
   computed: {
-    ...mapGetters(["getSendData"]),
+    ...mapGetters(["getSendData",'getData']),
   },
-
+  mounted(){
+    console.log(this.getSendData,"getsenddata")
+    console.log(this.getData,"getData")
+  }
 };
 </script>
 <style lang="scss" scoped>
-.img {
+.card {
   width: 100%;
-  height: 750px;
+  max-height: 620px;
 }
-.v-card.v-theme--light.v-card--density-default.v-card--variant-elevated{
-  border-radius:0px !important ;
+.img {
+  max-width: 100%;
+  height: auto;
+}
+.v-card.v-theme--light.v-card--density-default.v-card--variant-elevated {
+  border-radius: 0px !important ;
 }
 </style>
