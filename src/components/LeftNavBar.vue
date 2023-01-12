@@ -47,20 +47,38 @@ export default {
   }
 }
 
-@media(max-width:"1640px"){
-  .leftBar{
-    width:100px;
-// left:75px;
+@media (max-width: "1600px") {
+  .leftBar {
+    left: 80px;
+    width: 95px;
   }
 }
-@media(max-width:"1368px"){
-  .leftBar{
-    width:70px;
+@media (max-width: "1130px") {
+  .leftBar {
+    left: 58px;
   }
 }
-  @media(max-width:"1063px"){
-  .leftBar{
-    width:40px;
+@media (max-width: "820px") {
+  .leftBar {
+    left: 35px;
+  }
+}
+
+@media (max-width: "710px") {
+  .leftBar {
+    left: 35px;
+    width: 63px;
+  }
+}
+@media (max-width: "468px") {
+  .leftBar {
+    left: 23px;
+  }
+}
+
+@media (max-width: "500px") {
+  .leftBar {
+    left: 0;
   }
 }
 </style>

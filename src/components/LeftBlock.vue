@@ -15,18 +15,15 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getSendData",'getData']),
+    ...mapGetters(["getSendData", "getData"]),
   },
-  mounted(){
-    console.log(this.getSendData,"getsenddata")
-    console.log(this.getData,"getData")
-  }
 };
 </script>
 <style lang="scss" scoped>
 .card {
   width: 100%;
   max-height: 620px;
+  min-width: 350px;
 }
 .img {
   max-width: 100%;
@@ -34,5 +31,12 @@ export default {
 }
 .v-card.v-theme--light.v-card--density-default.v-card--variant-elevated {
   border-radius: 0px !important ;
+}
+
+
+@media (max-width:"425px"){
+  .card{
+    min-width: unset;
+  }
 }
 </style>

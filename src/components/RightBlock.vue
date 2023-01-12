@@ -5,9 +5,11 @@
       <span>Back to bedroom</span>
     </v-card-text>
     <v-card-subtitle class="card__subtitle px-4">
-      {{ getData?.subtitle }}
+      <span>{{ getData?.subtitle }}</span>
     </v-card-subtitle>
-    <v-card-title class="card__title px-4">{{ getData?.title }}</v-card-title>
+    <v-card-title class="card__title px-4"
+      ><span>{{ getData?.title }}</span></v-card-title
+    >
 
     <v-card-text class="card__stars">
       <v-rating
@@ -137,12 +139,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      "changeQuality",
-      "changeSize",
-      "changeStyle",
-      "changeImg",
-    ]),
+    ...mapActions(["changeQuality", "changeSize", "changeStyle", "changeImg"]),
   },
   watch: {
     getDataLoading(v) {
@@ -163,6 +160,7 @@ $btn-color3: var(--bg-color-3);
 
 .card {
   margin-left: 35px;
+  margin-bottom: 5px;
   p {
     font-weight: 600;
     margin-bottom: 10px;
@@ -183,7 +181,10 @@ $btn-color3: var(--bg-color-3);
     font-size: 36px;
     font-weight: 800;
     text-transform: initial !important;
+    display: flex;
+    flex-wrap: wrap;
   }
+
   &__subtitle {
     padding: 30px 0 0 0;
     letter-spacing: 3px;
@@ -203,7 +204,16 @@ $btn-color3: var(--bg-color-3);
     font-size: 20px;
     font-weight: 500;
     margin-top: 15px;
-
+    button {
+      margin-top: 15px;
+    }
+    .v-btn-group.v-theme--light.v-btn-group--density-default.v-btn-toggle {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .v-btn-group--density-default.v-btn-group {
+      height: auto !important;
+    }
     .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
       border: 1px solid #ccc;
       padding: 0 60px;
@@ -217,7 +227,9 @@ $btn-color3: var(--bg-color-3);
   &__style {
     font-size: 20px;
     font-weight: 500;
-
+    .v-btn-group--density-default.v-btn-group {
+      height: auto !important;
+    }
     .v-btn.v-btn--flat.v-theme--light.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated {
       border: 1px solid #ccc;
       border-radius: 30px;
@@ -230,6 +242,9 @@ $btn-color3: var(--bg-color-3);
       flex-wrap: wrap;
       gap: 15px;
     }
+  }
+  .v-btn-group--density-default.v-btn-group {
+    height: auto !important;
   }
   &__color {
     &-title {
@@ -250,7 +265,6 @@ $btn-color3: var(--bg-color-3);
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  background: #f6f6fa !important;
   padding-left: 12px;
   p {
     padding-bottom: 0px;
@@ -339,6 +353,15 @@ $btn-color3: var(--bg-color-3);
   }
 }
 
-@media (max-width: "1137px") {
+@media (max-width: "510px") {
+  .card__title {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: "390px") {
+  .card__title {
+    font-size: 20px;
+  }
 }
 </style>

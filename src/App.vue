@@ -3,7 +3,7 @@
     <v-main>
       <div class="app-container">
         <div class="main-container">
-          <left-nav-bar></left-nav-bar>
+          <left-nav-bar class="leftNavbar"></left-nav-bar>
           <v-row class="card">
             <v-col class="card__left">
               <left-block></left-block>
@@ -25,7 +25,7 @@ import LeftBlock from "./components/LeftBlock.vue";
 import LeftNavBar from "./components/LeftNavBar.vue";
 
 import FixedComponent from "./components/FixedComponent.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   components: { RightBlock, LeftBlock, FixedComponent, LeftNavBar },
   name: "App",
@@ -62,9 +62,8 @@ body {
 }
 
 .card {
-  &__left {
-    margin-left: 87px;
-  }
+  width: calc(100% - 50px);
+  margin-left: 40px;
 }
 
 .v-card--variant-elevated {
@@ -85,5 +84,44 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+@media (max-width: "960px") {
+  .fixed {
+    left: 15%;
+  }
+}
+
+@media (max-width: "710px") {
+  .card {
+    margin-left: 25px;
+  }
+}
+
+@media (max-width: "768px") {
+  .main-container {
+    width: 100%;
+  }
+  .app-container {
+    padding: 0;
+  }
+  .leftNavbar {
+    top: 0;
+    left: 0;
+  }
+  .fixed {
+    width: 100% !important;
+    left: 0;
+    bottom: 0;
+  }
+
+  // .leftNavbar{
+  //   display:flex;
+  //   flex-direction: row;
+  //   position: fixed;
+  //   top: 0;
+  //   right: 0;
+  //   height: unset;
+  // }
 }
 </style>

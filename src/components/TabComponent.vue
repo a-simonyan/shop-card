@@ -20,8 +20,8 @@
               >Customizable Items</v-card-title
             >
             <v-card flat class="inside__item">
-              <v-row cols="12">
-                <v-col cols="5">
+              <v-row >
+                <v-col  class="inside__item-img">
                   <v-img
                     width="215"
                     height="215"
@@ -29,7 +29,7 @@
                   >
                   </v-img>
                 </v-col>
-                <v-col cols="7" class="inside__item--text">
+                <v-col class="inside__item--text">
                   <div class="inside__item--text-titleBlock">
                     <v-card-title class="first">Decorative pillow</v-card-title>
                     <v-card-title class="second"
@@ -39,8 +39,8 @@
                   <v-btn>$80</v-btn>
                 </v-col>
               </v-row>
-              <v-row cols="12">
-                <v-col cols="5">
+              <v-row >
+                <v-col  class="inside__item-img">
                   <v-img
                     width="215"
                     height="215"
@@ -48,7 +48,7 @@
                   >
                   </v-img>
                 </v-col>
-                <v-col cols="7" class="inside__item--text">
+                <v-col  class="inside__item--text">
                   <div class="inside__item--text-titleBlock">
                     <v-card-title class="first">Throw KEISON </v-card-title>
                     <v-card-title class="second"
@@ -111,7 +111,12 @@ button.v-btn.v-theme--light.v-btn--density-default.rounded-0.v-btn--size-default
     font-size: 0.875rem;
   }
   &__item {
+    
     align-items: center;
+    &-img {
+      max-width: 215px;
+      max-height: 215px;
+    }
     &--text {
       .first {
         font-size: 0.875rem !important;
@@ -122,11 +127,31 @@ button.v-btn.v-theme--light.v-btn--density-default.rounded-0.v-btn--size-default
         cursor: pointer;
       }
       button {
-        margin-top: 70px;
+        margin-top: 50px;
         margin-left: 16px;
         padding: 0px 75px;
       }
     }
   }
 }
+@media (max-width: "1100px") {
+  .inside__item--text {
+    button {
+      padding: 0px 35px;
+    }
+  }
+  .inside__item-img {
+    min-width: 170px !important;
+    max-height: 150px;
+  }
+  .inside__item--text {
+    padding-top: 0;
+    button {
+      margin-top: 0;
+    }
+  }
+}
+// @media(max-width:"630px"){
+
+// }
 </style>
