@@ -3,7 +3,6 @@
     <v-main>
       <div class="app-container">
         <div class="main-container">
-          <left-nav-bar class="leftNavbar"></left-nav-bar>
           <v-row class="card">
             <v-col class="card__left">
               <left-block></left-block>
@@ -13,6 +12,8 @@
             </v-col>
           </v-row>
         </div>
+        <left-nav-bar class="leftNavbar"></left-nav-bar>
+
         <fixed-component class="fixed"></fixed-component>
       </div>
     </v-main>
@@ -114,14 +115,24 @@ body {
     left: 0;
     bottom: 0;
   }
+}
 
-  // .leftNavbar{
-  //   display:flex;
-  //   flex-direction: row;
-  //   position: fixed;
-  //   top: 0;
-  //   right: 0;
-  //   height: unset;
-  // }
+@media (max-width: "500px") {
+  .leftNavbar {
+    position: fixed;
+    height: unset;
+    width: unset;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    &__top,
+    &__bottom {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    margin-bottom: 0;
+  }
 }
 </style>

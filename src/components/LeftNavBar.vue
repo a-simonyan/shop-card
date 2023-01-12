@@ -78,7 +78,21 @@ export default {
 
 @media (max-width: "500px") {
   .leftBar {
+    position: fixed;
+    height: unset;
+    width: unset;
+    display: flex;
+    flex-direction: row;
+    top: 0;
     left: 0;
+    &__top,
+    &__bottom {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 0;
+      justify-content: center;
+    }
   }
 }
 </style>
