@@ -11,6 +11,7 @@ export default createStore({
       style: undefined,
       title: undefined,
       size: undefined,
+      color:undefined,
     },
     success_request:false
   },
@@ -51,7 +52,10 @@ export default createStore({
     postRequestData: ({ commit }, data) => {
       const r = fetch("http://127.0.0.1:8000/api/orders", {
         method: "POST",
-        body: data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       }).then((res) => {
         res.status === 200
           ? commit("SET_SUCCESS_REQUEST")

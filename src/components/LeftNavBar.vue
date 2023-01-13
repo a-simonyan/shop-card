@@ -80,7 +80,7 @@ export default {
   .leftBar {
     position: fixed;
     height: unset;
-    width: unset;
+    width: 100% !important;
     display: flex;
     flex-direction: row;
     top: 0;
