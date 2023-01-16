@@ -7,7 +7,7 @@
         class="ml-10 card-fixed__left-image"
         max-height="60"
         max-width="60"
-        :src="getSendData.image"
+        :src="getDefaultImg"
       ></v-img>
       <v-card-text class="card-fixed__title">
         <v-card-title>{{ getData?.title }}</v-card-title>
@@ -40,7 +40,12 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "FixedComponent",
   computed: {
-    ...mapGetters(["getData", "getSendData", "getSuccessRequest"]),
+    ...mapGetters([
+      "getData",
+      "getSendData",
+      "getSuccessRequest",
+      "getDefaultImg",
+    ]),
   },
   methods: {
     ...mapActions(["addCardPrice", "postRequestData"]),
@@ -186,14 +191,14 @@ export default {
 }
 
 @media (max-width: "430px") {
-  .card-fixed{
+  .card-fixed {
     display: flex;
     flex-direction: column !important;
   }
-  .card-fixed__title{
-    height:40px;
+  .card-fixed__title {
+    height: 40px;
   }
-  .card-fixed__right{
+  .card-fixed__right {
     margin-top: 15px;
     margin-bottom: 40px;
   }

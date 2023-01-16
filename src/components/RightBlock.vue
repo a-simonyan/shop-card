@@ -118,16 +118,19 @@ export default {
     getColorThing() {
       if (this.toggle_color !== undefined) {
         this.changeImg(this.getData.color.arr[this.toggle_color].img);
+        this.changeColor(this.getData.color.arr[this.toggle_color].color)
       }
     },
     getQualityThing() {
       this.changeQuality(this.getData.quality.arr[this.toggle_quality]);
     },
     getStyleThing() {
-      this.changeStyle(this.getData.size.arr[this.toggle_size]);
+      console.log("style")
+      this.changeStyle(this.getData.style.arr[this.toggle_style]);
     },
     getSizeThing() {
-      this.changeSize(this.getData.style.arr[this.toggle_style]);
+      console.log("size")
+      this.changeSize(this.getData.size.arr[this.toggle_size]);
     },
     cssVars() {
       return {
@@ -139,12 +142,13 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["changeQuality", "changeSize", "changeStyle", "changeImg"]),
+    ...mapActions(["changeQuality", "changeSize", "changeStyle", "changeImg","changeColor"]),
   },
   watch: {
     getDataLoading(v) {
       if (!v) {
         this.changeImg(this.getData.color.arr[0].img);
+        this.changeColor(this.getData.color.arr[0].color)
         this.colors = this.getData.color.arr.map((i) => i.color);
       }
     },

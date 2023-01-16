@@ -20,8 +20,8 @@
               >Customizable Items</v-card-title
             >
             <v-card flat class="inside__item">
-              <v-row >
-                <v-col  class="inside__item-img">
+              <v-row>
+                <v-col class="inside__item-img">
                   <v-img
                     width="215"
                     height="215"
@@ -39,8 +39,8 @@
                   <v-btn>$80</v-btn>
                 </v-col>
               </v-row>
-              <v-row >
-                <v-col  class="inside__item-img">
+              <v-row>
+                <v-col class="inside__item-img">
                   <v-img
                     width="215"
                     height="215"
@@ -48,7 +48,7 @@
                   >
                   </v-img>
                 </v-col>
-                <v-col  class="inside__item--text">
+                <v-col class="inside__item--text">
                   <div class="inside__item--text-titleBlock">
                     <v-card-title class="first">Throw KEISON </v-card-title>
                     <v-card-title class="second"
@@ -111,7 +111,6 @@ button.v-btn.v-theme--light.v-btn--density-default.rounded-0.v-btn--size-default
     font-size: 0.875rem;
   }
   &__item {
-    
     align-items: center;
     &-img {
       max-width: 215px;
@@ -151,7 +150,4 @@ button.v-btn.v-theme--light.v-btn--density-default.rounded-0.v-btn--size-default
     }
   }
 }
-// @media(max-width:"630px"){
-
-// }
 </style>

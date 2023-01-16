@@ -94,5 +94,8 @@ export default {
       justify-content: center;
     }
   }
+  .leftBar__top-menuIcon{
+    margin-top:0px
+  }
 }
 </style>

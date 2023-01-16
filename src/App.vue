@@ -93,12 +93,6 @@ body {
   }
 }
 
-@media (max-width: "710px") {
-  .card {
-    margin-left: 25px;
-  }
-}
-
 @media (max-width: "768px") {
   .main-container {
     width: 100%;
@@ -116,7 +110,11 @@ body {
     bottom: 0;
   }
 }
-
+@media (max-width: "710px") {
+  .card {
+    margin-left: 25px;
+  }
+}
 @media (max-width: "500px") {
   .leftNavbar {
     position: fixed;

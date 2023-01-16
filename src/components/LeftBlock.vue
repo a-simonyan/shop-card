@@ -1,7 +1,6 @@
 <template>
   <v-card class="card">
-    <img :src="getSendData.image" alt="#" class="img" />
-    <!-- <v-img :src="getSendData.image" width="100%" heigh="620"></v-img> -->
+    <img :src="getDefaultImg" alt="#" class="img" />
   </v-card>
 </template>
 
@@ -15,7 +14,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getSendData", "getData"]),
+    ...mapGetters(["getSendData", "getData", "getDefaultImg"]),
   },
 };
 </script>
@@ -33,9 +32,8 @@ export default {
   border-radius: 0px !important ;
 }
 
-
-@media (max-width:"425px"){
-  .card{
+@media (max-width: "425px") {
+  .card {
     min-width: unset;
   }
 }

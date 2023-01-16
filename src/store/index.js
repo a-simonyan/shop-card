@@ -5,21 +5,22 @@ export default createStore({
     data: null,
     loading: false,
     sendData: {
-      id: undefined,
-      price: undefined,
-      quality: undefined,
-      style: undefined,
-      title: undefined,
-      size: undefined,
-      color:undefined,
+      id: null,
+      price: null,
+      quality: null,
+      style: null,
+      size: null,
+      color: null,
     },
-    success_request:false
+    success_request: false,
+    defaultImg: undefined,
   },
   getters: {
     getData: (state) => state.data,
     getSendData: (state) => state.sendData,
+    getDefaultImg: (state) => state.defaultImg,
     getDataLoading: (state) => state.loading,
-    getSuccessRequest: state => state.getSuccessRequest,
+    getSuccessRequest: (state) => state.getSuccessRequest,
   },
   mutations: {
     SET_CHANGE_QUALITY: (state, payload) => (state.sendData.quality = payload),
@@ -28,7 +29,8 @@ export default createStore({
     SET_CARD_PRICE: (state, { id, price }) => {
       (state.sendData.id = id), (state.sendData.price = price);
     },
-    SET_CHANGE_IMG: (state, payload) => (state.sendData.image = payload),
+    SET_CHANGE_COLOR: (state, payload) => (state.sendData.color = payload),
+    SET_CHANGE_IMG: (state, payload) => (state.defaultImg = payload),
     GET_ASYNC_DATA: (state, payload) => (state.data = payload),
     GET_DATA_LOADING: (state, status) => (state.loading = status),
     SET_SUCCESS_REQUEST: (state) => (state.success_request = true),
@@ -61,7 +63,6 @@ export default createStore({
           ? commit("SET_SUCCESS_REQUEST")
           : commit("SET_FAILURE_REQUEST");
       });
-      console.log(r);
     },
     changeQuality: ({ commit }, payload) => {
       commit("SET_CHANGE_QUALITY", payload);
@@ -77,6 +78,9 @@ export default createStore({
     },
     changeImg: ({ commit }, payload) => {
       commit("SET_CHANGE_IMG", payload);
+    },
+    changeColor: ({ commit }, payload) => {
+      commit("SET_CHANGE_COLOR", payload);
     },
   },
   modules: {},
